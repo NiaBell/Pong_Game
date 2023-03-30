@@ -1,5 +1,7 @@
 from turtle import Turtle, Screen
 from paddle import Paddle
+from ball import Ball
+import time
 
 screen = Screen()
 screen.screensize(canvheight=600,canvwidth=800)
@@ -7,32 +9,24 @@ screen.bgcolor("black")
 screen.title('PONG')
 screen.tracer(0)
 
-paddle = Paddle()
+r_paddle = Paddle(350,0)
+l_paddle = Paddle(-350,0)
+ball = Ball()
+
 
 screen.listen()
-screen.onkey(paddle.move_up, 'Up')
-screen.onkey(paddle.move_down, 'Down')
+screen.onkey(r_paddle.move_up, 'Up')
+screen.onkey(r_paddle.move_down, 'Down')
+screen.onkey(l_paddle.move_up, 'w')
+screen.onkey(l_paddle.move_down, 's')
 
 game_is_on = True
 while game_is_on:
+    time.sleep(0.1)
     screen.update()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    ball.move()
+    if ball.ycor() > 580 or ball.ycor() < -580:
+        ball.change_direction()
 
 
 
